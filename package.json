@@ -1,0 +1,61 @@
+{
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "chai": "^4.3.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "healthcheck": "^0.1.3",
+    "json-server": "^0.17.0",
+    "jsonwebtoken": "^8.5.1",
+    "mocha": "^10.0.0",
+    "mongodb-memory-server": "^8.9.0",
+    "mongoose": "^6.5.2",
+    "supertest": "^6.2.4",
+    "swagger-jsdoc": "^6.2.5",
+    "swagger-ui-express": "^4.5.0"
+  },
+  "devDependencies": {
+    "@shelf/jest-mongodb": "^4.1.0",
+    "husky": "^8.0.1",
+    "jest": "^28.1.3",
+    "jest-runner-groups": "^2.2.0",
+    "nodemon": "^2.0.19",
+    "prettier": "^2.7.1"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "dev.env server.js nodemon server.js",
+    "json:server": "json-server --watch db.json",
+    "test": "jest --coverage --verbose",
+    "test:watch": "npm run test -- --watch",
+    "prepare": "husky install",
+    "lint": "prettier --check --fix .",
+    "format": "prettier --write ."
+  },
+  "husky": {
+    "hooks": {
+      "applypatch-msg": "echo \"[Husky] applypatch-msg\"",
+      "pre-applypatch": "echo \"[Husky] pre-applypatch\"",
+      "post-applypatch": "echo \"[Husky] post-applypatch\"",
+      "pre-commit": "prettier --write . && git add -A ."
+    }
+  },
+  "name": "gruppsarbete-backend",
+  "description": "Backend for group project",
+  "version": "1.0.0",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sararazm/gruppsarbete-backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sararazm/gruppsarbete-backend/issues"
+  },
+  "homepage": "https://github.com/sararazm/gruppsarbete-backend#readme",
+  "jest": {
+    "preset": "@shelf/jest-mongodb"
+  }
+}

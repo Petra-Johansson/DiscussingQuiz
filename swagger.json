@@ -1,0 +1,262 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is a REST API application made with Express",
+    "version": "1.0.0",
+    "title": "Express API for Users and Forumposts",
+    "contact": {
+      "name": "The repo is found here:",
+      "url": "https://github.com/sararazm/gruppsarbete-backend"
+    }
+  },
+  "host": "localhost:3030",
+  "basePath": "/api",
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/user": {
+      "get": {
+        "operationId": "allUsers",
+        "summary": "Get all users",
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml",
+          "text/html"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successfully fetched all users",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/user"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID",
+            "schema": {
+              "$ref": "#/definitions/errorModel"
+            }
+          }
+        }
+      }
+    },
+    "/user/signup": {
+      "post": {
+        "summary": "Add a new user",
+        "operationId": "addUser",
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "New user to add",
+            "schema": {
+              "$ref": "#/definitions/newUser"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "user added"
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/errorModel"
+            }
+          },
+          "404": {
+            "description": "cannot POST",
+            "schema": {
+              "$ref": "#/definitions/errorModel"
+            }
+          }
+        }
+      }
+    },
+    "/user/{id}": {
+      "patch": {
+        "summary": "Update user by ID",
+        "operationId": "updateUser",
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the user to update",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "User object for update",
+            "required": true,
+            "type": "object",
+            "schema": {
+              "$ref": "#/definitions/updateUser"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "user response",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/user"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID",
+            "schema": {
+              "$ref": "#/definitions/errorModel"
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Find user by ID",
+        "operationId": "findUserById",
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml",
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of user to get",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "user response",
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          },
+          "400": {
+            "description": "Invalid ID",
+            "schema": {
+              "$ref": "#/definitions/errorModel"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete user by ID",
+        "operationId": "deleteUser",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of user to delete",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "user successfully deleted"
+          },
+          "400": {
+            "description": "Invalid ID",
+            "schema": {
+              "$ref": "#/definitions/errorModel"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "user": {
+      "type": "object",
+      "allOf": [
+        {
+          "required": ["id"],
+          "properties": {
+            "id": {
+              "type": "string",
+              "unique": true
+            }
+          }
+        },
+        {
+          "$ref": "#/definitions/newUser"
+        }
+      ]
+    },
+    "newUser": {
+      "type": "object",
+      "allOf": [
+        {
+          "required": ["email", "password"],
+          "properties": {
+            "email": {
+              "example": "user@mail.se",
+              "type": "string",
+              "required": true,
+              "unique": true
+            },
+            "password": {
+              "example": "your pw goes here",
+              "type": "string",
+              "required": true
+            }
+          }
+        }
+      ]
+    },
+    "updateUser": {
+      "type": "object",
+      "allOf": [
+        {
+          "required": ["email"],
+          "properties": {
+            "email": {
+              "type": "string",
+              "required": true,
+              "example": "user@mail.se",
+              "unique": true
+            }
+          }
+        }
+      ]
+    },
+    "errorModel": {
+      "type": "object",
+      "required": ["code", "message"],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
