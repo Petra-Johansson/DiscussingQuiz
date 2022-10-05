@@ -43,3 +43,7 @@ The Discussing Quiz is a social learning platform where you can both discuss wit
    https://github.com/Petra-Johansson/QuizForumFrontend
    ````
 ---
+[tailwind.css]: https://img.shields.io/badge/Tailwind-Tailwind-green
+[tailwind-url]: https://tailwindcss.com
+[react.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[react-url]: https://reactjs.org/
