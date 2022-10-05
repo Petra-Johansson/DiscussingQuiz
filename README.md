@@ -22,11 +22,11 @@ The Discussing Quiz is a social learning platform where you can both discuss wit
 ### Installation
 
 
-> 1. Clone the repo
+> 1. Clone this repo
    ```sh
-   git clone https://github.com/sararazm/arbetsgrupp.git
+   git clone https://github.com/Petra-Johansson/DiscussingQuiz.git
    ```
-> 2. Install NPM packages
+> 2. Install NPM packages, in terminal type:
    ```sh
    npm install
    ```
@@ -38,7 +38,10 @@ The Discussing Quiz is a social learning platform where you can both discuss wit
    ````sh
    Docker compose up -d
    ```` 
-
+> 5. To run the Frontend built in React, go to this repo:
+   ````sh
+   git clone https://github.com/Petra-Johansson/DiscussingQuizFront.git
+   ````
 ---
 
 
