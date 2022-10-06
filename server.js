@@ -51,6 +51,6 @@ mongoose
 // docker test
 
 app.get("/", (req, res) => {
-  console.log("Docker is ON!");
-  res.send("Hello Docker!");
+  
+  res.send("Hello Heroku");
 });
