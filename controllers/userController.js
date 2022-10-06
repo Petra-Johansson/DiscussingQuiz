@@ -4,10 +4,11 @@ const jwt = require("jsonwebtoken");
 
 const {
   //createUserLogic,
-  oneUserLogic,
   deleteUserLogic,
   allUsersLogic,
   updateUserLogic,
+  getUser,
+  getUserEmail,
 } = require("../services/userServices");
 const router = express.Router();
 
@@ -17,13 +18,13 @@ const createToken = (_id) => {
 
 //CREATE USER
 const userSignUp = async (req, res) => {
-  const { email, password, _id } = req.body;
+  const { email, password} = req.body;
 
   try {
-    const user = await User.signingUp(_id, email, password);
+    const user = await User.signingUp( email, password);
 
     const token = createToken(user._id);
-    res.status(200).json({ email, token });
+    res.status(200).json({ email, password, token });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -50,7 +51,7 @@ const userSignIn = async (req, res) => {
 router.post("/signin", userSignIn);
 
 
-//GET ALL USERS - SWAGGER
+//GET ALL USERS
 const allUsers = async (req, res) => {
   const users = await allUsersLogic();
 
@@ -61,11 +62,12 @@ const allUsers = async (req, res) => {
 };
 router.get("/", allUsers);
 
+/*
 //GET /READ ONE USER BY ID
 const oneUser = async (req, res) => {
   const { id } = req.params;
 
-  const user = await oneUserLogic(id);
+  const user = await getUser(id);
   if (user._id) {
     return res.status(200).json({ user });
   } else {
@@ -75,6 +77,19 @@ const oneUser = async (req, res) => {
   }
 };
 router.get("/:id", oneUser);
+*/
+// GET ONE USER BY EMAIL(made for easier testing)
+const oneEmail = async(req,res)=> {
+  const { email }  = req.params;
+
+  const user = await getUserEmail(email);
+  if(user.email) {
+    return res.status(200).json({ user })
+  } else{
+    return res.status(400).json({ error: "Could not find a user with that e-mail"});
+  }
+};
+router.get("/:email", oneEmail);
 
 // UPDATE ONE USER BY ID
 const updateUser = async (req, res) => {
@@ -121,7 +136,8 @@ module.exports = {
   userSignIn,
   //createUser,
   allUsers,
-  oneUser,
+ //oneUser,
+ oneEmail,
   updateUser,
   deleteUser,
   router,

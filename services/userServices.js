@@ -58,13 +58,26 @@ const allUsersLogic = () => {
   }
 };
 
-//get one user logic
-
-const oneUserLogic = async (_id) => {
+//get one user logic, byid
+/*
+const getUser = async (id) => {
   try {
-    const oneUser = await User.findById(_id);
+    const oneUser = await User.findById(id);
 
     if (!oneUser) {
+      return error;
+    }
+    return oneUser;
+  } catch (error) {
+    return error;
+  }
+};
+*/
+const getUserEmail = async(email) => {
+  try {
+    const oneUser = await User.findOne({ email });
+
+    if(!oneUser){
       return error;
     }
     return oneUser;
@@ -106,7 +119,8 @@ module.exports = {
   createUserLogic,
   //userSignInLogic,
   allUsersLogic,
-  oneUserLogic,
+  //getUser,
+  getUserEmail,
   updateUserLogic,
   deleteUserLogic,
 };

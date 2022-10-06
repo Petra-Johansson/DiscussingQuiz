@@ -3,7 +3,6 @@ const baseURL = "http://localhost:3030/api/user";
 
 describe("GET users", () => {
   const newUser = {
-    _id: "630675e4d515e80c26eb14f3",
     email: "petratest@mail.com",
     password: "testword",
   };
@@ -11,15 +10,15 @@ describe("GET users", () => {
     await request(baseURL).post("/signup").send(newUser);
   });
   afterAll(async () => {
-    await request(baseURL).delete(`/${newUser._id}`);
+    await request(baseURL).delete(`/${newUser.email}`);
   });
 
   it("Should return status 200", async () => {
-    const res = await request(baseURL).get(`/${newUser._id}`);
+    const res = await request(baseURL).get(`/${newUser.email}`);
     expect(res.statusCode).toBe(200);
     expect(res.body.error).toBe(undefined);
   });
-  it("should return user by _id", async () => {
+  it("should return user by email", async () => {
     const res = await request(baseURL).get("");
     expect(res.body.users.length >= 1).toBe(true);
   });
@@ -27,12 +26,11 @@ describe("GET users", () => {
 
 describe("Post to user", () => {
   const newUser = {
-    _id: "630675e4d515e80c26eb14f3",
     email: "petratest@mail.com",
     password: "testword",
   };
   afterAll(async () => {
-    await request(baseURL).delete(`/${newUser._id}`);
+    await request(baseURL).delete(`/${newUser.email}`);
   });
 
   it("Should add a new user to db", async () => {
@@ -44,7 +42,6 @@ describe("Post to user", () => {
 
 describe("Patch/update user", () => {
   const newUser = {
-    _id: "630675e4d515e80c26eb14f3",
     email: "petratest@mail.com",
     password: "testword",
   };
@@ -53,11 +50,11 @@ describe("Patch/update user", () => {
     await request(baseURL).post("/signup").send(newUser);
   });
   afterAll(async () => {
-    await request(baseURL).delete(`/${newUser._id}`);
+    await request(baseURL).delete(`/${newUser.email}`);
   });
 
   it("should update/patch users email", async () => {
-    const res = await request(baseURL).patch(`/${newUser._id}`).send({
+    const res = await request(baseURL).patch(`/${newUser.email}`).send({
       email: updatedEmail,
     });
     expect(res.statusCode).toBe(200);
