@@ -1,8 +1,8 @@
 const Forumpost = require("../models/forumModel");
 
 const createForumPostLogic = (forumpost) => {
-  const user_id = user._id;
-  const { title, text, category } = forumpost;
+  const user_id = req.user._id;
+  const { title, text } = forumpost;
 
   if (!title) {
     return "You can not leave the titlefield empty";

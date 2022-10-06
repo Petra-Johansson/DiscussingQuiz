@@ -5,6 +5,8 @@ const { router: userRoutes } = require("./controllers/userController");
 const { router: quizRoutes } = require("./controllers/questionController");
 const v1forumRoutes = require("./controllers/v1forumpostController");
 const { router: commentsRoutes } = require("./controllers/commentsController");
+
+//const { router: forumRoutes} = require("./controllers/forumpostController")
 const cors = require("cors");
 
 const swaggerUi = require("swagger-ui-express");

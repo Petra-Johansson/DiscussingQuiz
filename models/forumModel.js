@@ -13,8 +13,11 @@ const forumSchema = new mongoose.Schema(
     },
     category: {
       type: String,
-      enum: ["Food", "Music", "Animals", "Economy", "Other"],
+      enum: ["Food", "Music", "Animals", "Computers", "Other"],
       default: "Other",
+    },
+    user_id: {
+      type:String,
     },
   },
   { timestamps: true }

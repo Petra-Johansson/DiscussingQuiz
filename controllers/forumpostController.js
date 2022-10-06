@@ -1,4 +1,5 @@
 const express = require("express");
+const Forum = require("../models/forumModel")
 const {
   createForumPostLogic,
   allForumPostsLogic,
@@ -7,8 +8,6 @@ const {
   updateOneForumPostLogic,
   deleteOneForumPostLogic,
 } = require("../services/forumServices");
-
-const { getAllComentsByPost } = require("../services/commentsService");
 
 const router = express.Router();
 

@@ -26,7 +26,7 @@ router.get("/", async (req, res) => {
 
 // GET one post by id
 router.get("/:id", async (req, res) => {
-  const forumpost = await ForumService.getForumpost(req.params._id);
+  const forumpost = await ForumService.getForumpost(req.params.id);
   if (forumpost) {
     res.status(200).send(forumpost);
   } else {
@@ -36,7 +36,7 @@ router.get("/:id", async (req, res) => {
 
 // UPDATE one post
 router.patch("/:id", async (req, res) => {
-  const forumpost = await ForumService.updateForumpost(req.params._id, req.body);
+  const forumpost = await ForumService.updateForumpost(req.params.id, req.body);
   if (forumpost) {
     res.status(200).send(forumpost);
   } else {
@@ -46,7 +46,7 @@ router.patch("/:id", async (req, res) => {
 
 //DELETE one post
 router.delete("/:id", async (req, res) => {
-  const forumpost = await ForumService.deleteForumpost(req.params._id);
+  const forumpost = await ForumService.deleteForumpost(req.params.id);
   if (!forumpost.error) {
     res.status(204).send();
   } else {

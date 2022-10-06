@@ -13,7 +13,7 @@ const {
 const router = express.Router();
 
 const createToken = (_id) => {
-  return jwt.sign({ _id }, process.env.SECRET, { expiresIn: "2d" });
+  return jwt.sign({ _id }, process.env.SECRET, { expiresIn: "365d" });
 };
 
 //CREATE USER
@@ -24,7 +24,7 @@ const userSignUp = async (req, res) => {
     const user = await User.signingUp( email, password);
 
     const token = createToken(user._id);
-    res.status(200).json({ email, password, token });
+    res.status(200).json({ email, token });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -41,9 +41,7 @@ const userSignIn = async (req, res) => {
     //create a JWT based on the user _id
     const token = createToken(user._id);
 
-    res.status(200).json({
-      message: `The user ${user.email}, successfully signed in with token: ${token}`,
-    });
+    res.status(200).json({email, token});
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -62,7 +60,7 @@ const allUsers = async (req, res) => {
 };
 router.get("/", allUsers);
 
-/*
+
 //GET /READ ONE USER BY ID
 const oneUser = async (req, res) => {
   const { id } = req.params;
@@ -77,7 +75,7 @@ const oneUser = async (req, res) => {
   }
 };
 router.get("/:id", oneUser);
-*/
+
 // GET ONE USER BY EMAIL(made for easier testing)
 const oneEmail = async(req,res)=> {
   const { email }  = req.params;
