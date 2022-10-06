@@ -52,5 +52,5 @@ mongoose
 
 app.get("/", (req, res) => {
   
-  res.send("Hello Heroku");
+  res.send("Hello Heroku :) To se all users aka see that we can fetch data from our database, go to https://discussing-quiz.herokuapp.com/api/user");
 });
